@@ -11,8 +11,6 @@ declare(strict_types=1);
  */
 namespace Irooit\SimpleJwt;
 
-use Doctrine\Common\Cache\Cache;
-use Doctrine\Common\Cache\FilesystemCache;
 use Irooit\SimpleJwt\Encoders\Base64UrlSafeEncoder;
 use Irooit\SimpleJwt\EncryptAdapters\PasswordHashEncrypter;
 use Irooit\SimpleJwt\Exceptions\InvalidTokenException;
@@ -23,9 +21,16 @@ use Irooit\SimpleJwt\Exceptions\TokenNotActiveException;
 use Irooit\SimpleJwt\Exceptions\TokenRefreshExpiredException;
 use Irooit\SimpleJwt\Interfaces\Encoder;
 use Irooit\SimpleJwt\Interfaces\Encrypter;
+use Psr\Container\ContainerInterface;
+use Psr\SimpleCache\CacheInterface;
 
 class JWTManager
 {
+    /**
+     * @var CacheInterface
+     */
+    public $cache;
+
     protected $ttl;
 
     /** @var int token 过期多久后可以被刷新,单位分钟 minutes */
@@ -36,9 +41,6 @@ class JWTManager
 
     /** @var Encoder */
     protected $encoder;
-
-    /** @var Cache */
-    protected $cache;
 
     /**
      * @var array
@@ -56,6 +58,11 @@ class JWTManager
     protected $prefix;
 
     /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * JWTManager constructor.
      */
     public function __construct(array $config)
@@ -69,23 +76,22 @@ class JWTManager
         $this->resolveEncrypter($config['default'] ?? PasswordHashEncrypter::class);
 
         $this->encoder = $config['encoder'] ?? new Base64UrlSafeEncoder();
-        $this->cache = $config['cache'] ?? new FilesystemCache(sys_get_temp_dir());
+        $this->cache = $config['cache'] ?? $this->getContainer()->get(CacheInterface::class);
         $this->ttl = $config['ttl'] ?? 60 * 60;
         $this->refreshTtl = $config['refresh_ttl'] ?? 60 * 60 * 24 * 7; // 单位秒，默认一周内可以刷新
+    }
+
+    /**
+     * @return ContainerInterface
+     */
+    public function getContainer()
+    {
+        return $this->container;
     }
 
     public function getTtl(): int
     {
         return $this->ttl;
-    }
-
-    public function getCache(): Cache
-    {
-        if ($this->cache instanceof Cache) {
-            return $this->cache;
-        }
-
-        return $this->cache = is_callable($this->cache) ? call_user_func_array($this->cache, [$this]) : new FilesystemCache(sys_get_temp_dir());
     }
 
     /**
@@ -217,7 +223,7 @@ class JWTManager
     public function addBlacklist($jwt)
     {
         $now = time();
-        $this->getCache()->save(
+        $this->cache->set(
             $this->blacklistKey($jwt),
             $now,
             ($jwt instanceof JWT ? ($jwt->getPayload()['iat'] || $now) : $now) + $this->getRefreshTtl() // 存到该 token 超过 refresh 即可
@@ -226,12 +232,17 @@ class JWTManager
 
     public function removeBlacklist($jwt)
     {
-        return $this->getCache()->delete($this->blacklistKey($jwt));
+        return $this->cache->delete($this->blacklistKey($jwt));
     }
 
     public function hasBlacklist($jwt)
     {
-        return $this->getCache()->contains($this->blacklistKey($jwt));
+        $cacheKey = $this->blacklistKey($jwt);
+        $cache = $this->cache->get($cacheKey);
+        if (! empty($cache)) {
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -13,8 +13,8 @@ namespace Irooit\SimpleJwt\Laravel;
 
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
-use Laravel\Lumen\Application as LumenApplication;
 use Irooit\SimpleJwt\JWTManager;
+use Laravel\Lumen\Application as LumenApplication;
 
 class ServiceProvider extends LaravelServiceProvider
 {
