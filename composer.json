@@ -20,7 +20,7 @@
     "require": {
         "php": ">=7.1",
         "ext-json": ">=1.0",
-        "doctrine/cache": "^1.10"
+        "doctrine/cache": "^2.1"
     },
     "license": "Apache-2.0",
     "require-dev": {
