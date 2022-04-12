@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 namespace Irooit\SimpleJwt;
 
+use Hyperf\Redis\Redis;
 use Irooit\SimpleJwt\Encoders\Base64UrlSafeEncoder;
 use Irooit\SimpleJwt\EncryptAdapters\PasswordHashEncrypter;
 use Irooit\SimpleJwt\Exceptions\InvalidTokenException;
@@ -21,16 +22,9 @@ use Irooit\SimpleJwt\Exceptions\TokenNotActiveException;
 use Irooit\SimpleJwt\Exceptions\TokenRefreshExpiredException;
 use Irooit\SimpleJwt\Interfaces\Encoder;
 use Irooit\SimpleJwt\Interfaces\Encrypter;
-use Psr\Container\ContainerInterface;
-use Psr\SimpleCache\CacheInterface;
 
 class JWTManager
 {
-    /**
-     * @var CacheInterface
-     */
-    public $cache;
-
     protected $ttl;
 
     /** @var int token 过期多久后可以被刷新,单位分钟 minutes */
@@ -41,6 +35,13 @@ class JWTManager
 
     /** @var Encoder */
     protected $encoder;
+
+    protected $cache;
+
+    /**
+     * @var Redis
+     */
+    protected $redis;
 
     /**
      * @var array
@@ -58,11 +59,6 @@ class JWTManager
     protected $prefix;
 
     /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
      * JWTManager constructor.
      */
     public function __construct(array $config)
@@ -76,17 +72,9 @@ class JWTManager
         $this->resolveEncrypter($config['default'] ?? PasswordHashEncrypter::class);
 
         $this->encoder = $config['encoder'] ?? new Base64UrlSafeEncoder();
-        $this->cache = $config['cache'] ?? $this->getContainer()->get(CacheInterface::class);
+        $this->cache = is_callable($config['cache']) ? call_user_func_array($config['cache'], []) : make(Redis::class);
         $this->ttl = $config['ttl'] ?? 60 * 60;
         $this->refreshTtl = $config['refresh_ttl'] ?? 60 * 60 * 24 * 7; // 单位秒，默认一周内可以刷新
-    }
-
-    /**
-     * @return ContainerInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
     }
 
     public function getTtl(): int
