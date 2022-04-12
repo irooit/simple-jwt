@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/qbhy/simple-jwt/blob/master/LICENSE
  */
-namespace Qbhy\SimpleJwt\Exceptions;
+namespace Irooit\SimpleJwt\Exceptions;
 
 class TokenExpiredException extends JWTException
 {

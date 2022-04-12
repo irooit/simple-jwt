@@ -5,7 +5,7 @@
 ## 如何安装 ？
 
 ```bash
-composer require 96qbhy/simple-jwt
+composer require irooit/simple-jwt
 ```
 
 ## 如何使用 ？
@@ -19,7 +19,7 @@ use Qbhy\SimpleJwt\Encoders;
 use Qbhy\SimpleJwt\EncryptAdapters;
 use Qbhy\SimpleJwt\Exceptions;
 
-$secret = '96qbhy/simple-jwt';
+$secret = 'irooit/simple-jwt';
 
 $headers = ['ver' => 0.1,];
 

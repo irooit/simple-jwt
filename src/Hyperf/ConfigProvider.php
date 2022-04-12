@@ -9,12 +9,12 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/qbhy/simple-jwt/blob/master/LICENSE
  */
-namespace Qbhy\SimpleJwt\Hyperf;
+namespace Irooit\SimpleJwt\Hyperf;
 
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Contract\ContainerInterface;
 use Hyperf\Utils\ApplicationContext;
-use Qbhy\SimpleJwt\JWTManager;
+use Irooit\SimpleJwt\JWTManager;
 
 class ConfigProvider
 {

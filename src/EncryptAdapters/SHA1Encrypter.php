@@ -9,9 +9,9 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/qbhy/simple-jwt/blob/master/LICENSE
  */
-namespace Qbhy\SimpleJwt\EncryptAdapters;
+namespace Irooit\SimpleJwt\EncryptAdapters;
 
-use Qbhy\SimpleJwt\AbstractEncrypter;
+use Irooit\SimpleJwt\AbstractEncrypter;
 
 class SHA1Encrypter extends AbstractEncrypter
 {

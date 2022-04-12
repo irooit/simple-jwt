@@ -9,26 +9,26 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/qbhy/simple-jwt/blob/master/LICENSE
  */
-namespace Qbhy\SimpleJwt\Laravel;
+namespace Irooit\SimpleJwt\Laravel;
 
 use Illuminate\Database\Eloquent\Model;
-use Qbhy\SimpleJwt\Exceptions\TokenProviderException;
-use Qbhy\SimpleJwt\JWT;
-use Qbhy\SimpleJwt\JWTManager;
+use Irooit\SimpleJwt\Exceptions\TokenProviderException;
+use Irooit\SimpleJwt\JWT;
+use Irooit\SimpleJwt\JWTManager;
 
 /**
  * Trait TokenProviderAble.
  *
- * @mixin \Qbhy\SimpleJwt\Interfaces\TokenProviderInterface
+ * @mixin \Irooit\SimpleJwt\Interfaces\TokenProviderInterface
  * @mixin \Illuminate\Database\Eloquent\Model
  */
 trait TokenProviderAble
 {
     /**
      * @throws TokenProviderException
-     * @throws \Qbhy\SimpleJwt\Exceptions\InvalidTokenException
-     * @throws \Qbhy\SimpleJwt\Exceptions\SignatureException
-     * @throws \Qbhy\SimpleJwt\Exceptions\TokenExpiredException
+     * @throws \Irooit\SimpleJwt\Exceptions\InvalidTokenException
+     * @throws \Irooit\SimpleJwt\Exceptions\SignatureException
+     * @throws \Irooit\SimpleJwt\Exceptions\TokenExpiredException
      * @return Model|TokenProviderAble
      */
     public static function fromToken(string $token)

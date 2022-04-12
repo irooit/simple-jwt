@@ -9,9 +9,9 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/qbhy/simple-jwt/blob/master/LICENSE
  */
-namespace Qbhy\SimpleJwt\Encoders;
+namespace Irooit\SimpleJwt\Encoders;
 
-use Qbhy\SimpleJwt\Interfaces\Encoder;
+use Irooit\SimpleJwt\Interfaces\Encoder;
 
 class Base64Encoder implements Encoder
 {

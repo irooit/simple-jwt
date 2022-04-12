@@ -9,9 +9,9 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/qbhy/simple-jwt/blob/master/LICENSE
  */
-namespace Qbhy\SimpleJwt;
+namespace Irooit\SimpleJwt;
 
-use Qbhy\SimpleJwt\Interfaces\Encrypter;
+use Irooit\SimpleJwt\Interfaces\Encrypter;
 
 abstract class AbstractEncrypter implements Encrypter
 {

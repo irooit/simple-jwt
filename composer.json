@@ -1,5 +1,5 @@
 {
-    "name": "96qbhy/simple-jwt",
+    "name": "irooit/simple-jwt",
     "description": "简单的 jwt 实现",
     "authors": [
         {
@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Qbhy\\SimpleJwt\\": "src/"
+            "Irooit\\SimpleJwt\\": "src/"
         }
     },
     "autoload-dev": {

@@ -9,8 +9,8 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/qbhy/simple-jwt/blob/master/LICENSE
  */
-use Qbhy\SimpleJwt\Encoders;
-use Qbhy\SimpleJwt\EncryptAdapters as Encrypter;
+use Irooit\SimpleJwt\Encoders;
+use Irooit\SimpleJwt\EncryptAdapters as Encrypter;
 
 return [
     /*
@@ -39,7 +39,7 @@ return [
 
     /*
      * 可选配置
-     * 加密类必须实现 Qbhy\SimpleJwt\Interfaces\Encrypter 接口
+     * 加密类必须实现 Irooit\SimpleJwt\Interfaces\Encrypter 接口
      */
     'drivers' => [
         Encrypter\PasswordHashEncrypter::alg() => Encrypter\PasswordHashEncrypter::class,

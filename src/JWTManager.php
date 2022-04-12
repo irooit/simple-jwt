@@ -9,20 +9,20 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/qbhy/simple-jwt/blob/master/LICENSE
  */
-namespace Qbhy\SimpleJwt;
+namespace Irooit\SimpleJwt;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\FilesystemCache;
-use Qbhy\SimpleJwt\Encoders\Base64UrlSafeEncoder;
-use Qbhy\SimpleJwt\EncryptAdapters\PasswordHashEncrypter;
-use Qbhy\SimpleJwt\Exceptions\InvalidTokenException;
-use Qbhy\SimpleJwt\Exceptions\SignatureException;
-use Qbhy\SimpleJwt\Exceptions\TokenBlacklistException;
-use Qbhy\SimpleJwt\Exceptions\TokenExpiredException;
-use Qbhy\SimpleJwt\Exceptions\TokenNotActiveException;
-use Qbhy\SimpleJwt\Exceptions\TokenRefreshExpiredException;
-use Qbhy\SimpleJwt\Interfaces\Encoder;
-use Qbhy\SimpleJwt\Interfaces\Encrypter;
+use Irooit\SimpleJwt\Encoders\Base64UrlSafeEncoder;
+use Irooit\SimpleJwt\EncryptAdapters\PasswordHashEncrypter;
+use Irooit\SimpleJwt\Exceptions\InvalidTokenException;
+use Irooit\SimpleJwt\Exceptions\SignatureException;
+use Irooit\SimpleJwt\Exceptions\TokenBlacklistException;
+use Irooit\SimpleJwt\Exceptions\TokenExpiredException;
+use Irooit\SimpleJwt\Exceptions\TokenNotActiveException;
+use Irooit\SimpleJwt\Exceptions\TokenRefreshExpiredException;
+use Irooit\SimpleJwt\Interfaces\Encoder;
+use Irooit\SimpleJwt\Interfaces\Encrypter;
 
 class JWTManager
 {

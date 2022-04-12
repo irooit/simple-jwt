@@ -9,12 +9,12 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/qbhy/simple-jwt/blob/master/LICENSE
  */
-namespace Qbhy\SimpleJwt\Laravel;
+namespace Irooit\SimpleJwt\Laravel;
 
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
-use Qbhy\SimpleJwt\JWTManager;
+use Irooit\SimpleJwt\JWTManager;
 
 class ServiceProvider extends LaravelServiceProvider
 {
